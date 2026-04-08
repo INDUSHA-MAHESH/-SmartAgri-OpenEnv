@@ -1,0 +1,8 @@
+version: "1.0"
+name: "SmartAgricultureEnv"
+description: "An RL environment for optimizing water and fertilizer usage across crop fields based on weather forecasts."
+entrypoint: "environment:SmartAgricultureEnv"
+tasks:
+  - "easy_irrigation"
+  - "medium_resource_management"
+  - "hard_weather_adaptation"
