@@ -1,3 +1,7 @@
 openenv-core
 pydantic
 openai
+fastapi
+uvicorn
+setuptools
+wheel
