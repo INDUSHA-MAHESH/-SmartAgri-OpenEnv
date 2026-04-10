@@ -2,7 +2,52 @@ version: "1.0"
 name: "SmartAgricultureEnv"
 description: "An RL environment for optimizing water and fertilizer usage across crop fields based on weather forecasts."
 entrypoint: "environment:SmartAgricultureEnv"
+action_space:
+  type: object
+  properties:
+    water_allocations:
+      type: object
+      description: "Map of field_id (int) to water units (0.0-0.3)"
+    fertilizer_allocations:
+      type: object
+      description: "Map of field_id (int) to fertilizer units (0.0-0.2)"
+observation_space:
+  type: object
+  properties:
+    day:
+      type: integer
+    weather_forecast:
+      type: string
+      enum: ["Sunny", "Rainy"]
+    water_budget:
+      type: number
+    fields:
+      type: array
+      items:
+        type: object
+        properties:
+          field_id: {type: integer}
+          moisture: {type: number}
+          nutrition: {type: number}
+          growth: {type: number}
 tasks:
-  - "easy_irrigation"
-  - "medium_resource_management"
-  - "hard_weather_adaptation"
+  - id: "easy_irrigation"
+    name: "Easy Irrigation"
+    description: "Single field, large water budget, always sunny. Agent must keep moisture in 0.4-0.6 range and grow the crop to >= 0.7 growth over 7 days."
+    difficulty: "easy"
+    grader: "environment:grade_easy_irrigation"
+    success_threshold: 0.7
+
+  - id: "medium_resource_management"
+    name: "Medium Resource Management"
+    description: "Three fields, limited water budget (4.0 units total). Agent must allocate scarce water across fields to maximise average crop growth."
+    difficulty: "medium"
+    grader: "environment:grade_medium_resource_management"
+    success_threshold: 0.6
+
+  - id: "hard_weather_adaptation"
+    name: "Hard Weather Adaptation"
+    description: "Three fields, unpredictable weather (mostly sunny, occasional rain), extremely tight budget (2.5 units). Agent must adapt allocations based on forecasts."
+    difficulty: "hard"
+    grader: "environment:grade_hard_weather_adaptation"
+    success_threshold: 0.5
