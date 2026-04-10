@@ -1,4 +1,5 @@
 # AgriEnv - OpenEnv RL Environment
+PS: This is the first time we have ever worked on OpenEnv or Something RL. Our team 99% exploration built this for a hackathon. Even though the code was written with help of AI, we vision a lot of interesting usecases and developments to AgriEnv, this is primitive setup.
 
 ## Motivation
 AgriEnv simulates a real-world precision agriculture and water conservation task. Agents act as automated irrigation controllers, balancing crop health against water scarcity and unpredictable weather. This addresses crucial social and ecological challenges in water management.
